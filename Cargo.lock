@@ -3834,12 +3834,14 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-mongoose"
-version = "0.0.0"
+version = "0.2.1"
 dependencies = [
  "mongodb",
  "serde",
+ "serde_json",
  "tauri",
  "thiserror 1.0.69",
+ "tokio",
 ]
 
 [[package]]
@@ -4068,6 +4070,7 @@ dependencies = [
  "bytes",
  "libc",
  "mio",
+ "parking_lot",
  "pin-project-lite",
  "signal-hook-registry",
  "socket2 0.6.1",

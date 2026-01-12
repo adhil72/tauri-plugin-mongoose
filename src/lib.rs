@@ -2,19 +2,14 @@ use tauri::{
     plugin::{Builder, TauriPlugin},
     Runtime,
 };
-use std::sync::Mutex;
 
-mod db;
+pub mod db;
 mod commands;
 
-use db::MongooseState;
+pub use db::{connect_to_db, get_client, is_connected, create_document, get_document_by_id, set_db_name, get_db_name};
 
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("mongoose")
         .invoke_handler(tauri::generate_handler![commands::connect, commands::create, commands::get_by_id])
-        .setup(|app, _api| {
-            app.manage(MongooseState(Mutex::new(None)));
-            Ok(())
-        })
         .build()
 }

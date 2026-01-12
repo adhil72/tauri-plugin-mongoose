@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { InferSchemaType, Schema } from "../schema";
-import Time, { isTime } from '../types/time.type';
+import { Time, isTime } from '../types';
 
 export default class Model {
     name: string

@@ -1,17 +1,18 @@
-use tauri::{command, State, Runtime};
-use crate::db::{MongooseState, connect_to_db, create_document, get_document_by_id};
+use tauri::command;
+use serde_json::Value;
+use crate::db::{connect_to_db, create_document, get_document_by_id};
 
-#[command]
-pub async fn connect(state: State<'_, MongooseState>, url: String) -> Result<(), String> {
-    connect_to_db(&state, url).await
+#[command(rename_all = "camelCase")]
+pub async fn connect(url: String, db_name: Option<String>) -> Result<(), String> {
+    connect_to_db(url, db_name).await
 }
 
 #[command]
-pub async fn create(state: State<'_, MongooseState>, collection: String, document: serde_json::Value) -> Result<serde_json::Value, String> {
-    create_document(&state, collection, document).await
+pub async fn create(collection: String, document: Value) -> Result<Value, String> {
+    create_document(collection, document).await
 }
 
 #[command]
-pub async fn get_by_id(state: State<'_, MongooseState>, collection: String, id: String) -> Result<Option<serde_json::Value>, String> {
-    get_document_by_id(&state, collection, id).await
+pub async fn get_by_id(collection: String, id: String) -> Result<Option<Value>, String> {
+    get_document_by_id(collection, id).await
 }
