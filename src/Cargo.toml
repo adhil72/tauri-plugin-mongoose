@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-mongoose"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Adhil"]
 edition = "2021"
 description = "Tauri plugin for MongoDB/Mongoose-like database operations"
@@ -10,6 +10,7 @@ homepage = "https://github.com/adhil72/tauri-plugin-mongoose"
 keywords = ["tauri", "plugin", "mongoose", "mongodb", "database"]
 categories = ["database", "gui"]
 readme = "../README.md"
+links = "tauri-plugin-mongoose"
 
 [lib]
 path = "lib.rs"
@@ -24,3 +25,6 @@ tokio = { version = "1", features = ["sync"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full", "test-util"] }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
