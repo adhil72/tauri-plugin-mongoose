@@ -1,0 +1,40 @@
+{
+    "name": "tauri-plugin-mongoose",
+    "version": "0.1.0",
+    "description": "Tauri plugin for MongoDB/Mongoose-like database operations",
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup index.ts --format cjs,esm --dts",
+        "prepublishOnly": "npm run build"
+    },
+    "keywords": [
+        "tauri",
+        "plugin",
+        "mongoose",
+        "mongodb",
+        "database"
+    ],
+    "author": "Adhil",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/adhil72/tauri-plugin-mongoose.git"
+    },
+    "bugs": {
+        "url": "https://github.com/adhil72/tauri-plugin-mongoose/issues"
+    },
+    "homepage": "https://github.com/adhil72/tauri-plugin-mongoose#readme",
+    "devDependencies": {
+        "tsup": "^8.0.0",
+        "typescript": "^5.0.0",
+        "@tauri-apps/api": "^2.0.0-beta"
+    },
+    "peerDependencies": {
+        "@tauri-apps/api": "^2.0.0-beta"
+    }
+}

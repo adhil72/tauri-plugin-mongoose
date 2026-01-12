@@ -1,0 +1,18 @@
+[package]
+name = "tauri-plugin-mongoose"
+version = "0.1.0"
+authors = ["Adhil"]
+edition = "2021"
+description = "Tauri plugin for MongoDB/Mongoose-like database operations"
+license = "MIT"
+repository = "https://github.com/adhil72/tauri-plugin-mongoose"
+homepage = "https://github.com/adhil72/tauri-plugin-mongoose"
+keywords = ["tauri", "plugin", "mongoose", "mongodb", "database"]
+categories = ["database", "gui"]
+readme = "../README.md"
+
+[dependencies]
+tauri = { version = "2", features = ["unstable"] }
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+mongodb = "3.4.1"
