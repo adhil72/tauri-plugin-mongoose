@@ -15,7 +15,7 @@ pub async fn create_document(collection_name: String, document: Value) -> Result
         bson_doc.insert("_id", ObjectId::new());
     }
 
-    collection.insert_one(bson_doc.clone()).await.map_err(|e| e.to_string())?;
+    collection.insert_one(bson_doc.clone(), None).await.map_err(|e| e.to_string())?;
 
     let json_doc: Value = mongodb::bson::from_document(bson_doc).map_err(|e| e.to_string())?;
     Ok(json_doc)
@@ -31,7 +31,7 @@ pub async fn get_document_by_id(collection_name: String, id: String) -> Result<O
     let oid = ObjectId::parse_str(&id).map_err(|e| format!("Invalid ID format: {}", e))?;
     let filter = mongodb::bson::doc! { "_id": oid };
 
-    let result = collection.find_one(filter).await.map_err(|e| e.to_string())?;
+    let result = collection.find_one(filter, None).await.map_err(|e| e.to_string())?;
 
     match result {
         Some(doc) => {

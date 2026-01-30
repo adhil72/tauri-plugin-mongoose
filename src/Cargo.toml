@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-mongoose"
-version = "0.2.2"
+version = "0.2.4"
 authors = ["Adhil"]
 edition = "2021"
 description = "Tauri plugin for MongoDB/Mongoose-like database operations"
@@ -19,7 +19,7 @@ path = "lib.rs"
 tauri = { version = "2", features = ["unstable"] }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
-mongodb = "3.4.1"
+mongodb = "2.8.2"
 serde_json = "1.0"
 tokio = { version = "1", features = ["sync"] }
 

@@ -5,13 +5,43 @@ export interface ConnectOptions {
     dbName?: string;
 }
 
-export async function connect(options: ConnectOptions): Promise<void>;
-export async function connect(url: string, dbName?: string): Promise<void>;
-export async function connect(urlOrOptions: string | ConnectOptions, dbName?: string): Promise<void> {
+export interface ConnectCallbacks {
+    onSuccess?: () => void;
+    onError?: (error: string) => void;
+}
+
+export async function connect(options: ConnectOptions, callbacks?: ConnectCallbacks): Promise<void>;
+export async function connect(url: string, dbName?: string, callbacks?: ConnectCallbacks): Promise<void>;
+export async function connect(
+    urlOrOptions: string | ConnectOptions,
+    dbNameOrCallbacks?: string | ConnectCallbacks,
+    callbacks?: ConnectCallbacks
+): Promise<void> {
+    let url: string;
+    let dbName: string | undefined;
+    let cbs: ConnectCallbacks | undefined;
+
     if (typeof urlOrOptions === 'string') {
-        await invoke('plugin:mongoose|connect', { url: urlOrOptions, dbName });
+        url = urlOrOptions;
+        if (typeof dbNameOrCallbacks === 'string') {
+            dbName = dbNameOrCallbacks;
+            cbs = callbacks;
+        } else {
+            cbs = dbNameOrCallbacks;
+        }
     } else {
-        await invoke('plugin:mongoose|connect', { url: urlOrOptions.url, dbName: urlOrOptions.dbName });
+        url = urlOrOptions.url;
+        dbName = urlOrOptions.dbName;
+        cbs = dbNameOrCallbacks as ConnectCallbacks | undefined;
+    }
+
+    try {
+        await invoke('plugin:mongoose|connect', { url, dbName });
+        cbs?.onSuccess?.();
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        cbs?.onError?.(errorMessage);
+        throw error;
     }
 }
 
