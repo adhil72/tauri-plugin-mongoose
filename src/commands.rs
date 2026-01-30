@@ -27,7 +27,7 @@ pub async fn get_user(username: String, db: Option<String>) -> Result<Option<Val
     get_user_by_name(username, db).await
 }
 
-#[command]
-pub async fn create_db_user(username: String, password: String, db: String, roles: Vec<Value>) -> Result<Value, String> {
-    create_user(username, password, db, roles).await
+#[command(rename_all = "camelCase")]
+pub async fn create_db_user(username: String, password: String, db: String, roles: Vec<Value>, custom_data: Option<Value>) -> Result<Value, String> {
+    create_user(username, password, db, roles, custom_data).await
 }
