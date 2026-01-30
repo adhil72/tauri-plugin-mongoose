@@ -1,6 +1,6 @@
 use tauri::command;
 use serde_json::Value;
-use crate::db::{connect_to_db, create_document, get_document_by_id, get_all_users, get_user_by_name};
+use crate::db::{connect_to_db, create_document, get_document_by_id, get_all_users, get_user_by_name, create_user};
 
 #[command(rename_all = "camelCase")]
 pub async fn connect(url: String, db_name: Option<String>) -> Result<(), String> {
@@ -25,4 +25,9 @@ pub async fn get_users() -> Result<Vec<Value>, String> {
 #[command]
 pub async fn get_user(username: String, db: Option<String>) -> Result<Option<Value>, String> {
     get_user_by_name(username, db).await
+}
+
+#[command]
+pub async fn create_db_user(username: String, password: String, db: String, roles: Vec<Value>) -> Result<Value, String> {
+    create_user(username, password, db, roles).await
 }

@@ -50,3 +50,23 @@ pub async fn get_user_by_name(username: String, db: Option<String>) -> Result<Op
         Ok(None)
     }
 }
+
+pub async fn create_user(username: String, password: String, db: String, roles: Vec<Value>) -> Result<Value, String> {
+    let client = get_client().await?;
+    let target_db = client.database(&db);
+    
+    let roles_bson: Vec<mongodb::bson::Bson> = roles
+        .into_iter()
+        .filter_map(|r| mongodb::bson::to_bson(&r).ok())
+        .collect();
+    
+    let command = mongodb::bson::doc! {
+        "createUser": username,
+        "pwd": password,
+        "roles": roles_bson
+    };
+    
+    let result = target_db.run_command(command, None).await.map_err(|e| e.to_string())?;
+    let json_result: Value = mongodb::bson::from_document(result).map_err(|e| e.to_string())?;
+    Ok(json_result)
+}

@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-mongoose"
-version = "0.2.6"
+version = "0.2.7"
 authors = ["Adhil"]
 edition = "2021"
 description = "Tauri plugin for MongoDB/Mongoose-like database operations"

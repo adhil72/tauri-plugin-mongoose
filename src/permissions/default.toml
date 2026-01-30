@@ -1,3 +1,3 @@
 [default]
 description = "Default permissions for the mongoose plugin"
-permissions = ["allow-connect", "allow-create", "allow-get-by-id", "allow-get-users", "allow-get-user"]
+permissions = ["allow-connect", "allow-create", "allow-get-by-id", "allow-get-users", "allow-get-user", "allow-create-db-user"]

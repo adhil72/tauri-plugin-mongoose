@@ -9,6 +9,7 @@ Default permissions for the mongoose plugin
 - `allow-get-by-id`
 - `allow-get-users`
 - `allow-get-user`
+- `allow-create-db-user`
 
 ## Permission Table
 
@@ -67,6 +68,32 @@ Enables the create command without any pre-configured scope.
 <td>
 
 Denies the create command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:allow-create-db-user`
+
+</td>
+<td>
+
+Enables the create_db_user command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:deny-create-db-user`
+
+</td>
+<td>
+
+Denies the create_db_user command without any pre-configured scope.
 
 </td>
 </tr>

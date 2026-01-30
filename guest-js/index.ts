@@ -67,5 +67,16 @@ export async function getUser(username: string, db?: string): Promise<MongoDBUse
     return await invoke('plugin:mongoose|get_user', { username, db });
 }
 
+export interface CreateUserOptions {
+    username: string;
+    password: string;
+    db: string;
+    roles: MongoDBRole[];
+}
+
+export async function createUser(options: CreateUserOptions): Promise<{ ok: number }> {
+    return await invoke('plugin:mongoose|create_db_user', { ...options });
+}
+
 export { default as Model } from './model';
 export * from './schema';

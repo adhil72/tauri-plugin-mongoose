@@ -319,6 +319,18 @@
           "markdownDescription": "Denies the create command without any pre-configured scope."
         },
         {
+          "description": "Enables the create_db_user command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-create-db-user",
+          "markdownDescription": "Enables the create_db_user command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the create_db_user command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-create-db-user",
+          "markdownDescription": "Denies the create_db_user command without any pre-configured scope."
+        },
+        {
           "description": "Enables the get_by_id command without any pre-configured scope.",
           "type": "string",
           "const": "allow-get-by-id",
@@ -355,10 +367,10 @@
           "markdownDescription": "Denies the get_users command without any pre-configured scope."
         },
         {
-          "description": "Default permissions for the mongoose plugin\n#### This default permission set includes:\n\n- `allow-connect`\n- `allow-create`\n- `allow-get-by-id`\n- `allow-get-users`\n- `allow-get-user`",
+          "description": "Default permissions for the mongoose plugin\n#### This default permission set includes:\n\n- `allow-connect`\n- `allow-create`\n- `allow-get-by-id`\n- `allow-get-users`\n- `allow-get-user`\n- `allow-create-db-user`",
           "type": "string",
           "const": "default",
-          "markdownDescription": "Default permissions for the mongoose plugin\n#### This default permission set includes:\n\n- `allow-connect`\n- `allow-create`\n- `allow-get-by-id`\n- `allow-get-users`\n- `allow-get-user`"
+          "markdownDescription": "Default permissions for the mongoose plugin\n#### This default permission set includes:\n\n- `allow-connect`\n- `allow-create`\n- `allow-get-by-id`\n- `allow-get-users`\n- `allow-get-user`\n- `allow-create-db-user`"
         }
       ]
     }
