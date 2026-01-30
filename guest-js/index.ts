@@ -72,6 +72,7 @@ export interface CreateUserOptions {
     password: string;
     db: string;
     roles: MongoDBRole[];
+    customData?: Record<string, unknown>;
 }
 
 export async function createUser(options: CreateUserOptions): Promise<{ ok: number }> {

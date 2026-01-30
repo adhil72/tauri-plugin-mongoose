@@ -1,6 +1,6 @@
 {
     "name": "tauri-plugin-mongoose",
-    "version": "0.2.5",
+    "version": "0.2.7",
     "description": "Tauri plugin for MongoDB/Mongoose-like database operations",
     "main": "dist/index.cjs",
     "module": "dist/index.js",
