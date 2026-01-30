@@ -7,6 +7,8 @@ Default permissions for the mongoose plugin
 - `allow-connect`
 - `allow-create`
 - `allow-get-by-id`
+- `allow-get-users`
+- `allow-get-user`
 
 ## Permission Table
 
@@ -91,6 +93,58 @@ Enables the get_by_id command without any pre-configured scope.
 <td>
 
 Denies the get_by_id command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:allow-get-user`
+
+</td>
+<td>
+
+Enables the get_user command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:deny-get-user`
+
+</td>
+<td>
+
+Denies the get_user command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:allow-get-users`
+
+</td>
+<td>
+
+Enables the get_users command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`mongoose:deny-get-users`
+
+</td>
+<td>
+
+Denies the get_users command without any pre-configured scope.
 
 </td>
 </tr>
