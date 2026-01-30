@@ -10,6 +10,20 @@ export interface ConnectCallbacks {
     onError?: (error: string) => void;
 }
 
+export interface MongoDBRole {
+    role: string;
+    db: string;
+}
+
+export interface MongoDBUser {
+    _id: string;
+    userId: { $binary: { base64: string; subType: string } };
+    user: string;
+    db: string;
+    roles: MongoDBRole[];
+    mechanisms?: string[];
+}
+
 export async function connect(options: ConnectOptions, callbacks?: ConnectCallbacks): Promise<void>;
 export async function connect(url: string, dbName?: string, callbacks?: ConnectCallbacks): Promise<void>;
 export async function connect(
@@ -43,6 +57,14 @@ export async function connect(
         cbs?.onError?.(errorMessage);
         throw error;
     }
+}
+
+export async function getUsers(): Promise<MongoDBUser[]> {
+    return await invoke('plugin:mongoose|get_users');
+}
+
+export async function getUser(username: string, db?: string): Promise<MongoDBUser | null> {
+    return await invoke('plugin:mongoose|get_user', { username, db });
 }
 
 export { default as Model } from './model';
