@@ -73,6 +73,31 @@ export default class Model {
         return doc;
     }
 
+
+    async find(filter: object = {}, options: { limit?: number, skip?: number, page?: number, sort?: object } = {}): Promise<InferSchemaType<typeof this.schema>[]> {
+        const docs = await invoke('plugin:mongoose|find', {
+            collection: this.name,
+            filter,
+            options
+        }) as InferSchemaType<typeof this.schema>[];
+
+        // Validate all documents
+        return Promise.all(docs.map(doc => this.validate(doc)));
+    }
+
+    async findOne(filter: object = {}, options: { skip?: number, sort?: object } = {}): Promise<InferSchemaType<typeof this.schema> | null> {
+        const doc = await invoke('plugin:mongoose|find_one', {
+            collection: this.name,
+            filter,
+            options
+        }) as InferSchemaType<typeof this.schema> | null;
+
+        if (doc) {
+            return this.validate(doc);
+        }
+        return null;
+    }
+
     async create(doc: InferSchemaType<typeof this.schema>): Promise<InferSchemaType<typeof this.schema>> {
         const validatedDoc = await this.validate(doc);
         return await invoke('plugin:mongoose|create', {

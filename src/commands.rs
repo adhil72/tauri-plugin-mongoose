@@ -1,6 +1,6 @@
 use tauri::command;
 use serde_json::Value;
-use crate::db::{connect_to_db, create_document, get_document_by_id, get_all_users, get_user_by_name, create_user};
+use crate::db::{connect_to_db, create_document, get_document_by_id, get_all_users, get_user_by_name, create_user, find_documents, find_one_document, SearchOptions};
 
 #[command(rename_all = "camelCase")]
 pub async fn connect(url: String, db_name: Option<String>) -> Result<(), String> {
@@ -30,4 +30,14 @@ pub async fn get_user(username: String, db: Option<String>) -> Result<Option<Val
 #[command(rename_all = "camelCase")]
 pub async fn create_db_user(username: String, password: String, db: String, roles: Vec<Value>, custom_data: Option<Value>) -> Result<Value, String> {
     create_user(username, password, db, roles, custom_data).await
+}
+
+#[command]
+pub async fn find(collection: String, filter: Option<Value>, options: Option<SearchOptions>) -> Result<Vec<Value>, String> {
+    find_documents(collection, filter, options).await
+}
+
+#[command(rename_all = "camelCase")]
+pub async fn find_one(collection: String, filter: Option<Value>, options: Option<SearchOptions>) -> Result<Option<Value>, String> {
+    find_one_document(collection, filter, options).await
 }
